@@ -77,9 +77,10 @@ describe Whereabouts::AddressLookup::Adapters::AddressFacade do
       end
     }
 
-    it "raises an exception when service cannot be reached for uprn search" do
+    it "raises an exception when service cannot be reached for uprn search", focus: true do
       VCR.use_cassette("adaptor_no_such_server_uprn") do
         setup_bad_server
+        byebug
 
         expect {
           subject.find_by_uprn("77138")
