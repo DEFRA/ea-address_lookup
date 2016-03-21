@@ -1,5 +1,4 @@
-#require "whereabouts/adapters"
-require "whereabouts/adapters/address_facade"
+require "whereabouts/address_lookup/adapters/address_facade"
 
 module Whereabouts
   module AddressLookup
@@ -22,10 +21,11 @@ module Whereabouts
       raise MissingAdapterError if adapter_name.blank?
       raise MissingAdapterError unless adapter_name.is_a?(String) || adapter_name.is_a?(Symbol)
 
-      name = adapter_name.to_s.classify.to_s
-      @adapter = Adapters.const_get(name)
-      rescue NameError => ex
-        raise UnrecognisedAdapterError, adapter_name
+      adapter_klass = adapter_name.to_s.classify.to_s
+      @adapter = Adapters.const_get(adapter_klass).new
+
+    rescue NameError => ex
+      raise UnrecognisedAdapterError, adapter_name
     end
   end
 end

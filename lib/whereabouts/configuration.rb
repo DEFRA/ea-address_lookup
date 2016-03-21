@@ -1,35 +1,12 @@
-# module Whereabouts
-#   class Configuration
-#     attr_accessor :api_host
-
-#     def initialize
-#     end
-#   end
-
-#   class << self
-#     attr_writer :configuration
-#   end
-
-#   def self.configuration
-#     @configuration ||= Configuration.new
-#   end
-
-#   def self.reset
-#     @configuration = Configuration.new
-#   end
-
-#   def self.configure
-#     yield(configuration)
-#   end
-# end
-
 require "active_support/configurable"
 module Whereabouts
   class Configuration
     include ActiveSupport::Configurable
-
-    # Define accessors and optional defaults
-    config_accessor(:api_host)
+    config_accessor(:address_facade_server)
+    config_accessor(:address_facade_port)
+    config_accessor(:address_facade_url)
+    config_accessor(:address_facade_client_id)
+    config_accessor(:address_facade_key)
   end
 
   def self.config
@@ -40,7 +17,7 @@ module Whereabouts
     yield config
   end
 
-   def self.reset
+  def self.reset
     @config = Configuration.new
   end
 end
