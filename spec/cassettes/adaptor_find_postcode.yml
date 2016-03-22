@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://addressfacade.cloudapp.net/address-service/v1/addresses/postcode?client-id=example%20team1&key=client1&postcode=BS6%205QA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Sep 2015 16:27:35 GMT
+      Content-Type:
+      - application/json
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        dh4rGyUG2SEv7EB2/vr8L4pJ9jUtQgAA
+    http_version:
+  recorded_at: Thu, 17 Sep 2015 16:20:06 GMT
+recorded_with: VCR 2.9.3

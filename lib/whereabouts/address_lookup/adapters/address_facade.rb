@@ -29,19 +29,40 @@
 # running server @ http://localhost:9002/swagger
 #
 require "rest_client"
+require "benchmark"
 
 module Whereabouts
   module AddressLookup
     module Adapters
       class AddressFacade
-        attr_reader :server, :uri, :cid, :key
+        attr_reader :base_url
 
         def reset
-          self.server = nil
-          self.uri = nil
-          self.cid = nil
-          self.key = nil
+          @base_url = nil
         end
+
+        def base_url
+          @base_url ||= begin
+            host = "http://#{Whereabouts.config.address_facade_server}:#{Whereabouts.config.address_facade_port}"
+            URI.join(host, Whereabouts.config.address_facade_url || '').to_s
+          end
+        end
+
+        def find_by_uprn(uprn)
+          with_logging(:find_by_uprn, uprn) do
+            result = http_get(uprn)
+            parsed = parse_json(result)
+          end
+        end
+
+        def find_by_postcode(post_code)
+          with_logging(:find_by_postcode, post_code) do
+            result = http_get("postcode", postcode: post_code)
+            parsed = parse_json(result)
+          end
+        end
+
+        private
 
         def default_query_params
           {
@@ -50,100 +71,37 @@ module Whereabouts
           }
         end
 
-        def url
-          @server ||= "http://#{Whereabouts.config.address_facade_server}:#{Whereabouts.config.address_facade_port}"
-          @uri ||= URI.join(@server, Whereabouts.config.address_facade_url)
-          @uri.to_s
-        end
-
-        def client_id
-          @cid ||= Whereabouts.config.address_facade_client_id
-        end
-
-        def key
-          @key ||= Whereabouts.config.address_facade_key
-        end
-
-        def raise_error(ex, message)
-          raise Whereabouts::AddressServiceUnavailableError.new("Address by #{message} - #{ex.message}")
-        end
-
-        def find_by_uprn(uprn)
-
-            Whereabouts.logger.info "Address search for UPRN [#{uprn}]"
-
-            result = http_get(uprn)
-            # http_address = url + "/#{uprn}"
-
-            # # The AddressBaseFacade is internal within AWS, so we need to ensure that we DO NOT use a proxy
-            # RestClient::Request.execute(method: :get, url: http_address, proxy: false,
-            #   headers: {
-            #     params: default_query_params
-            #   })
-
-          # rescue => e
-          #   raise_error(e, "UPRN failed to reach server #{http_address}?client-id=#{client_id}&key=#{key}")
-          # end
-
-          parsed = begin
-            JSON.parse(result)
-          rescue => e
-            Whereabouts.logger.error("Address by UPRN failed to parse JSON results")
-            Whereabouts.logger.error(e.message.to_s)
-            {}
-          end
-
-          Whereabouts.logger.info "Addresses for UPRN (#{uprn} [#{parsed.inspect}]"
-          parsed
-        end
-
-        def find_by_postcode(post_code)
-          # begin
-            Whereabouts.logger.info "Address search for PostCode [#{post_code}]"
-
-            #http_address = url + "/postcode"
-
-            result = http_get("/postcode", postcode: post_code)
-
-            # # The AddressBaseFacade is internal within AWS, so we need to ensure that we DO NOT use a proxy
-            # result = RestClient::Request.execute(method: :get, url: http_address, proxy: false,
-            #           headers: {
-            #             params: { 'postcode': post_code }.merge(default_query_params)
-            #           })
-
-          # rescue => e
-          #   raise_error(e, "PostCode failed to reach server #{http_address}?client-id=#{client_id}&key=#{key}")
-          # end
-
-          begin
-            parsed = JSON.parse(result)
-          rescue => e
-            Whereabouts.logger.error("Address by PostCode failed to parse JSON results")
-            Whereabouts.logger.error(e.message.to_s)
-            parsed = {}
-          end
-
-          Whereabouts.logger.info "Addresses for PostCode (#{post_code}) [#{parsed.inspect}]"
-          parsed
-        end
-
-        private
-        attr_writer :server, :uri, :cid, :key
-
         def http_get(path, query_params = {})
-
-          http_address = File.join(url, path)
-
+          http_address = URI.join(base_url, path).to_s
           # The AddressBaseFacade is internal within AWS, so we need to ensure that we DO NOT use a proxy
           result = RestClient::Request.execute(
             method: :get,
-            url: http_address, proxy: false,
+            url: http_address,
+            proxy: false,
             headers: {
               params: default_query_params.merge(query_params)
             })
-          # rescue => e
-          #   raise_error(e, "UPRN failed to reach server #{http_address}?client-id=#{client_id}&key=#{key}")
-          #   raise Whereabouts::AddressServiceUnavailableError.new("Address by #{message} - #{ex.message}")
+          rescue => ex
+            p ex
+            raise Whereabouts::AddressServiceUnavailableError,
+                  "#{http_address} params:#{ default_query_params.merge(query_params)} - #{ex.message}"
+        end
+
+        def parse_json(json)
+          JSON.parse(json)
+        rescue => e
+          Whereabouts.logger.error("Failed to parse JSON results #{e.message} #{json}")
+          {}
+        end
+
+        def with_logging(scope, arg, &block)
+          parsed_result = nil
+          time = Benchmark.realtime do
+            parsed_result = block.call
+          end
+          Whereabouts.logger.info "#{scope}(#{arg}) took #{sprintf("%05.2fms", time * 1000)}"
+          Whereabouts.logger.debug "#{scope}(#{arg}) result #{parsed_result}"
+          parsed_result
         end
       end
     end

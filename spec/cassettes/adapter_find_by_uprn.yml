@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://addressfacade.cloudapp.net/address-service/v1/addresses/77138?client-id=example%20team&key=client1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0.rc2 (linux-gnu x86_64) ruby/2.2.3p173
+      Host:
+      - addressfacade.cloudapp.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 22 Mar 2016 16:22:34 GMT
+      Content-Type:
+      - application/json
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAFWRXWvCMBSG/0rJxa5Ka/CjtiBjH14Imzrt3RglppmGxSQk
+        JzIR//tOW514E/Kej+c9OTkRMMDUOwO+E54UNCYemIM20Eqh65sITlZgKh+s
+        VVI4UpAdgPVFmjIrE+NqzTQXPriDOCbcJOEntYphJD3QlNW1E96jCNbpx+aY
+        ZBntjx+Um0znDzUD5gVMXpdPpLP6dmZfcXTSgFYewgYTyAgKcNbPE2kYpGgh
+        MbnwsZKO42g5eykX82hdrqbTMo6eV7N1uXjDy3oUDT8aB+O2TEvPQBqE6KBU
+        TKwTe+lFByHNMpwQUN3Qd1gsUIYzJeF4BfD2Ti52WGCNB25q0QT/rX9R9Yc5
+        HY+SHsqmg2YDmg9ayQ1uUmoGovJHD2J/hePXYAz31NDoKO3RlOZ5hi0bZUPV
+        pTuzy3PQnKnr+HcpZbYSR2+bwn3Km+B468MqONrGrLaMnL/Of0xxafkvAgAA
+    http_version:
+  recorded_at: Tue, 22 Mar 2016 16:21:33 GMT
+recorded_with: VCR 3.0.1

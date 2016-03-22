@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://addressfacade.cloudapp.net/address-service/v1/addresses/10091760640?client-id=example%20team1&key=client1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Sep 2015 16:27:33 GMT
+      Content-Type:
+      - application/json
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAF1R20oDMRT8lSUPPi17UXuxUGRLixa1K9v6ICJLmo0aTJOQ
+        nBRL6b97srXW+hLOzCQzw8mWgAYqHyiwD+7III+JA2qhJVrIVXME3ooadO28
+        MVJwSwbkA8C4QZpSIxJtG0UV487bNd8kTCf+MzWSIpOu85Q2jeXOIfDGqutw
+        DPMsu8p73ax7mZ1JO5zMzhoK1HEYjh8Lsg98s3pVM8xTgIEO/BIFdPISsPHL
+        lgQnrHe0islPFt6/LaqH+WQW3VTl02McLappOS7n0aiY3cXReFLMJtVzVJXF
+        OI5G1XS+KO9xmOdRp7jFGG3fqRKOgtDqvxnKxvKVcGFx5K8xCVu0nEN97PE3
+        CnWpGZUCNmSgvJQxYe1MfioEa+2A6YYH8rfOF6KLTj+/yJIcYXiR9867/V7S
+        7yNmGr9AKAq8dhsHfHVwxz9FDlfLD8xSGl/v6X3Kng6pVB5qn0hSvwvs3D7y
+        p5LT3rLWn9awMaFzYyjZve6+AXrAq39gAgAA
+    http_version:
+  recorded_at: Thu, 17 Sep 2015 16:20:05 GMT
+recorded_with: VCR 2.9.3

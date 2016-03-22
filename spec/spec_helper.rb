@@ -9,7 +9,14 @@ VCR.configure do |c|
   c.cassette_library_dir = "spec/cassettes"
   c.hook_into :webmock
   c.ignore_hosts "127.0.0.1"
-  # c.allow_http_connections_when_no_cassette = true
+  c.allow_http_connections_when_no_cassette = true
+  c.default_cassette_options = {
+    record: :once,
+    match_requests_on: [
+      :method,
+      VCR.request_matchers.uri_without_param(%w(client-d key))
+    ]
+  }
 end
 
 Whereabouts.logger.level = Logger::WARN
