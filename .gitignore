@@ -1,3 +1,9 @@
+/.git-hooks/pre_commit/il8n_missing.rb
+/.git-hooks/pre_commit/il8n_unused.rb
+/.git-hooks/pre_commit/rspec_focus_check.rb
+/.overcommit.yml
+/.overcommit_gems.rb
+/.overcommit_gems.rb.lock
 /.bundle/
 /.yardoc
 /Gemfile.lock
