@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://addressfacade.cloudapp.net/address-service/v1/addresses/postcode?client-id=example%20team&key=client1&postcode=BS1%201AH
+    uri: http://addressfacade.cloudapp.net/address-service/v1/addresses/postcode?client-id=example%20team1&key=client1&postcode=BS1%201AH
     body:
       encoding: US-ASCII
       string: ''
@@ -30,7 +30,7 @@ http_interactions:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{ bad_json : [] }'
+      string: '{ bad_json : [ }'
     http_version:
   recorded_at: Tue, 22 Mar 2016 16:25:11 GMT
 recorded_with: VCR 3.0.1

@@ -1,8 +1,7 @@
-require "whereabouts/address_lookup/adapters/address_facade"
+require "ea/address_lookup/adapters/address_facade"
 
-module Whereabouts
-  module AddressLookup
-    extend self
+module EA::AddressLookup
+  module Finders
     def find_by_postcode(post_code)
       adapter.find_by_postcode(post_code)
     end

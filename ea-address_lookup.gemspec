@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'whereabouts/version'
+require 'ea/address_lookup/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "whereabouts"
-  spec.version       = Whereabouts::VERSION
+  spec.name          = "ea-address_lookup"
+  spec.version       = EA::AddressLookup::VERSION
   spec.authors       = ["Tim Crowe"]
   spec.email         = ["tim@woodpigeon.com"]
 

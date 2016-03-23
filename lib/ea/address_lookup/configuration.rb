@@ -1,5 +1,6 @@
 require "active_support/configurable"
-module Whereabouts
+
+module EA::AddressLookup
   class Configuration
     include ActiveSupport::Configurable
     config_accessor(:address_facade_server)

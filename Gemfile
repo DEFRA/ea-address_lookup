@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.2.3"
 
-# Specify your gem's dependencies in whereabouts.gemspec
+# Specify your gem's dependencies in *.gemspec
 gemspec
 
 # Use the test group rather than putting gems for testing in the gemspec with

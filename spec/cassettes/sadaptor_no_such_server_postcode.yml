@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://addressfacade.nosuchplaceinthewww.junk/address-service/v1/addresses/77138?client-id=example%20team1&key=example%20team1
+    uri: http://addressfacade.nosuchplaceinthewww.junk/address-service/v1/addresses/postcode?client-id=example%20team&key=client1&postcode=BS1%201AH
     body:
       encoding: US-ASCII
       string: ''

@@ -1,9 +1,9 @@
 # A consumer can hook into logging like so:
-#   Whereabouts.logger = Rails.logger
+#   EA::AddressLookup.logger = Rails.logger
 # or to silence logging unless there are errors for example:
-#  Whereabouts.logger.level = Logger::ERROR
+#  EA::AddressLookup.logger.level = Logger::ERROR
 #
-module Whereabouts
+module EA::AddressLookup
   class << self
     attr_writer :logger
 
