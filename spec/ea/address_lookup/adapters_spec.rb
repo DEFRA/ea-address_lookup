@@ -1,9 +1,7 @@
 require "spec_helper"
 
 describe EA::AddressLookup do
-
   describe "adapters" do
-
     describe "#adapter" do
       it "defaults to :address_facade" do
         expect(described_class.adapter).to_not be_nil

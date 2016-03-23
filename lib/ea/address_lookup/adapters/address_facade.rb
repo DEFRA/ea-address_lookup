@@ -42,8 +42,11 @@ module EA::AddressLookup
 
       def base_url
         @base_url ||= begin
-          host = "http://#{EA::AddressLookup.config.address_facade_server}:#{EA::AddressLookup.config.address_facade_port}"
-          URI.join(host, EA::AddressLookup.config.address_facade_url || '').to_s
+          server = EA::AddressLookup.config.address_facade_server
+          port = EA::AddressLookup.config.address_facade_port
+          url = EA::AddressLookup.config.address_facade_url
+          host = "http://#{server}:#{port}"
+          URI.join(host, url || "").to_s
         end
       end
 
@@ -80,10 +83,10 @@ module EA::AddressLookup
           headers: {
             params: default_query_params.merge(query_params)
           })
-        rescue => ex
-          raise ex if ex.class.to_s.match /^VCR/
-          raise EA::AddressLookup::AddressServiceUnavailableError,
-                "#{http_address} params:#{ default_query_params.merge(query_params)} - #{ex.message}"
+      rescue => ex
+        raise ex if ex.class.to_s =~ /^VCR/
+        raise EA::AddressLookup::AddressServiceUnavailableError,
+              "#{http_address} params:#{default_query_params.merge(query_params)} - #{ex.message}"
       end
 
       def parse_json(json)
@@ -96,9 +99,9 @@ module EA::AddressLookup
       def with_logging(scope, arg, &block)
         parsed_result = nil
         time = Benchmark.realtime do
-          parsed_result = block.call
+          parsed_result = yield
         end
-        EA::AddressLookup.logger.info "#{scope}(#{arg}) took #{sprintf("%05.2fms", time * 1000)}"
+        EA::AddressLookup.logger.info "#{scope}(#{arg}) took #{sprintf('%05.2fms', time * 1000)}"
         EA::AddressLookup.logger.debug "#{scope}(#{arg}) result #{parsed_result}"
         parsed_result
       end

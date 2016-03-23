@@ -4,19 +4,18 @@ describe EA::AddressLookup::Adapters::AddressFacade do
   before do
     EA::AddressLookup.configure do |config|
       config.address_facade_server = server #'addressfacade.cloudapp.net'
-      config.address_facade_port = ''
+      config.address_facade_port = ""
       config.address_facade_url = url# '/address-service/v1/addresses/'
       config.address_facade_client_id = client_id# 'example team'
       config.address_facade_key = key # 'client1'
-     end
-   end
-    let(:server)      { 'addressfacade.cloudapp.net' }
-    let(:url)         { '/address-service/v1/addresses/' }
-    let(:key)         { 'client1' }
-    let(:client_id)   { 'example team1' }
+    end
+  end
+  let(:server)      { "addressfacade.cloudapp.net" }
+  let(:url)         { "/address-service/v1/addresses/" }
+  let(:key)         { "client1" }
+  let(:client_id)   { "example team1" }
 
   describe "Configuration and setup" do
-
     it "can be configured via Rails config" do
       expect(EA::AddressLookup.config.address_facade_server).to_not be_nil
       expect(EA::AddressLookup.config.address_facade_port).to be_instance_of String
@@ -24,7 +23,7 @@ describe EA::AddressLookup::Adapters::AddressFacade do
     end
 
     it "provides access to full service url" do
-      url1 =  subject.base_url
+      url1 = subject.base_url
       expect(url1.to_s).to include "http://"
       expect(url1.to_s).to include server
     end
@@ -66,7 +65,7 @@ describe EA::AddressLookup::Adapters::AddressFacade do
     }
 
     context "bad server" do
-      let(:server) {  "addressfacade.nosuchplaceinthewww.junk" }
+      let(:server) { "addressfacade.nosuchplaceinthewww.junk" }
       it "raises an exception when service cannot be reached for uprn search" do
         VCR.use_cassette("adaptor_no_such_server_uprn") do
           expect {
@@ -85,19 +84,19 @@ describe EA::AddressLookup::Adapters::AddressFacade do
     end
 
     context "bad key" do
-      let(:key) {  "clientduffnaff" }
+      let(:key) { "clientduffnaff" }
 
       it "raises an exception when service config bad for UPRN" do
-       VCR.use_cassette("adaptor_bad_config_uprn") do
-        expect {
-          subject.find_by_uprn("77138")
-        }.to raise_error EA::AddressLookup::AddressServiceUnavailableError
+        VCR.use_cassette("adaptor_bad_config_uprn") do
+          expect {
+            subject.find_by_uprn("77138")
+          }.to raise_error EA::AddressLookup::AddressServiceUnavailableError
         end
-     end
-   end
+      end
+    end
 
     it "raises an exception when service config bad for Postcode" do
-     VCR.use_cassette("adaptor_bad_config_postcode") do
+      VCR.use_cassette("adaptor_bad_config_postcode") do
         setup_bad_config
         expect {
           subject.find_by_postcode("BS1 1AH")

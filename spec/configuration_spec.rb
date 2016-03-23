@@ -1,7 +1,6 @@
 require "spec_helper"
 
 describe EA::AddressLookup::Configuration do
-
   it {is_expected.to respond_to(:address_facade_server) }
   it {is_expected.to respond_to(:address_facade_port) }
 
