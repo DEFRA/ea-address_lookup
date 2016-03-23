@@ -4,3 +4,8 @@ require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
+
+# Add the before_commit rake task
+require 'before_commit'
+spec = Gem::Specification.find_by_name 'before_commit'
+load "#{spec.gem_dir}/lib/tasks/before_commit.rake"
