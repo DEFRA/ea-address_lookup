@@ -1,13 +1,13 @@
 # EA::AddressLookup
 
-
+This ruby gem provides address lookup functionality by postcode.
 
 ## Installation
 
 Add the gem to your Gemfile
 
 ```ruby
-gem 'digital-services-core'
+gem 'ea-address_lookup'
 ```
 
 Then run;
