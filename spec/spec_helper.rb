@@ -12,11 +12,6 @@ VCR.configure do |c|
   c.allow_http_connections_when_no_cassette = false
   c.default_cassette_options = {
     record: :once
-    # ,
-    # match_requests_on: [
-    #   :method,
-    #   VCR.request_matchers.uri_without_param(%w(client-id key postcode))
-    # ]
   }
 end
 
