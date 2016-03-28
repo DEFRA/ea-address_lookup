@@ -8,6 +8,7 @@ module EA::AddressLookup
     config_accessor(:address_facade_url)
     config_accessor(:address_facade_client_id)
     config_accessor(:address_facade_key)
+    config_accessor(:default_adapter) { :address_facade }
   end
 
   def self.config
