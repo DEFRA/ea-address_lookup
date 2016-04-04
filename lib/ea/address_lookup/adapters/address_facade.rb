@@ -73,9 +73,10 @@ module EA::AddressLookup
         }
       end
 
+      # The AddressBaseFacade is internal within AWS, so we need to
+      # ensure that we DO NOT use a proxy in http calls.
       def http_get(path, query_params = {})
         http_address = URI.join(base_url, path).to_s
-        # The AddressBaseFacade is internal within AWS, so we need to ensure that we DO NOT use a proxy
         result = RestClient::Request.execute(
           method: :get,
           url: http_address,
@@ -86,13 +87,16 @@ module EA::AddressLookup
       rescue => ex
         raise ex if ex.class.to_s =~ /^VCR/
         raise EA::AddressLookup::AddressServiceUnavailableError,
-              "#{http_address} params:#{default_query_params.merge(query_params)} - #{ex.message}"
+              "#{http_address} "\
+              "params:#{default_query_params.merge(query_params)} - "\
+              "#{ex.message}"
       end
 
       def parse_json(json)
         JSON.parse(json)
       rescue => e
-        EA::AddressLookup.logger.error("Failed to parse JSON results #{e.message} #{json}")
+        EA::AddressLookup.logger.error("Failed to parse JSON results "\
+                                       "#{e.message} #{json}")
         {}
       end
 
@@ -101,8 +105,9 @@ module EA::AddressLookup
         time = Benchmark.realtime do
           parsed_result = yield
         end
-        EA::AddressLookup.logger.info "#{scope}(#{arg}) took #{sprintf('%05.2fms', time * 1000)}"
-        EA::AddressLookup.logger.debug "#{scope}(#{arg}) result #{parsed_result}"
+        EA::AddressLookup.logger.info "#{scope}(#{arg}) took "\
+                                       "#{sprintf('%05.2fms', time * 1000)}"
+        EA::AddressLookup.logger.debug "#{scope}(#{arg}) #{parsed_result}"
         parsed_result
       end
     end

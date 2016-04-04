@@ -18,7 +18,8 @@ describe EA::AddressLookup::Adapters::AddressFacade do
   describe "Configuration and setup" do
     it "can be configured via Rails config" do
       expect(EA::AddressLookup.config.address_facade_server).to_not be_nil
-      expect(EA::AddressLookup.config.address_facade_port).to be_instance_of String
+      expect(EA::AddressLookup.config.address_facade_port)
+        .to be_instance_of String
       expect(EA::AddressLookup.config.address_facade_url).to_not be_empty
     end
 
@@ -74,7 +75,7 @@ describe EA::AddressLookup::Adapters::AddressFacade do
         end
       end
 
-      it "raises an exception when service cannot be reached for postcode search" do
+      it "raises an exception when service unreachable for postcode search" do
         VCR.use_cassette("adaptor_no_such_server_postcode") do
           expect {
             subject.find_by_postcode("BS1 1AH")

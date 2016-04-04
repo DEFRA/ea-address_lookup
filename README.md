@@ -10,11 +10,36 @@ Add the gem to your Gemfile
 gem 'ea-address_lookup'
 ```
 
-Then run;
+Then execute:
 
 ```bash
 bundle install
 ```
+
+## Usage
+
+### Rails
+
+Create an intializer eg ```config/initializers/address_lookup.rb```
+
+```ruby
+EA::AddressLookup.configure do |config|
+  config.address_facade_server = <some_host_name>
+  config.address_facade_port = ""
+  config.address_facade_url = "/address-service/v1/addresses/""
+  config.address_facade_client_id = <client_id>
+  config.address_facade_key = <key>
+end
+```
+
+Now you can do the following:
+
+```ruby
+EA::AddressLookup.adapter = :address_facade # optional as its the default
+hash = EA::AddressLookup.find_by_postcode('BA1 5AH')
+hash = EA::AddressLookup.find_by_uprn('12345678')
+```
+
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.
