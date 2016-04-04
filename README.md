@@ -1,5 +1,7 @@
 # EA::AddressLookup
 
+[![Build Status](https://travis-ci.org/EnvironmentAgency/ea-address_lookup.svg?branch=master)](https://travis-ci.org/EnvironmentAgency/ea-address_lookup)
+
 This ruby gem provides address lookup functionality by postcode.
 
 ## Installation
@@ -20,7 +22,7 @@ bundle install
 
 ### Rails
 
-Create an intializer eg ```config/initializers/address_lookup.rb```
+Create an intializer eg `config/initializers/address_lookup.rb`
 
 ```ruby
 EA::AddressLookup.configure do |config|
