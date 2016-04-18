@@ -3,10 +3,10 @@ require "spec_helper"
 describe EA::AddressLookup::Adapters::AddressFacade do
   before do
     EA::AddressLookup.configure do |config|
-      config.address_facade_server = server #'addressfacade.cloudapp.net'
+      config.address_facade_server = server # 'addressfacade.cloudapp.net'
       config.address_facade_port = ""
-      config.address_facade_url = url# '/address-service/v1/addresses/'
-      config.address_facade_client_id = client_id# 'example team'
+      config.address_facade_url = url # '/address-service/v1/addresses/'
+      config.address_facade_client_id = client_id # 'example team'
       config.address_facade_key = key # 'client1'
     end
   end
@@ -34,7 +34,7 @@ describe EA::AddressLookup::Adapters::AddressFacade do
         VCR.use_cassette("adapter_find_by_postcode") do
           response = subject.find_by_postcode("BS6 5QA")
           expect(response).to be_an_instance_of(Hash)
-          expect(response.has_key?("results")).to be true
+          expect(response.key?("results")).to be true
           expect(response["results"]).to be_instance_of Array
           expect(response["results"].size).to be > 4
         end
@@ -44,7 +44,7 @@ describe EA::AddressLookup::Adapters::AddressFacade do
         VCR.use_cassette("adapter_find_by_uprn") do
           response = subject.find_by_uprn("77138")
           expect(response).to be_an_instance_of(Hash)
-          expect(response.has_key?("results")).to be true
+          expect(response.key?("results")).to be true
           expect(response["results"]).to be_instance_of Array
           expect(response["results"].size).to be 1
         end

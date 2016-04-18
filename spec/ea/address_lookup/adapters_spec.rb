@@ -11,7 +11,9 @@ describe EA::AddressLookup do
     end
 
     describe "#adpater=" do
+      # rubocop:disable Style/ClassAndModuleChildren
       class ::EA::AddressLookup::Adapters::TestAdapter2; end
+      # rubocop:enable Style/ClassAndModuleChildren
 
       it "assigns a matching adapter class" do
         described_class.adapter = :test_adapter2
@@ -20,7 +22,7 @@ describe EA::AddressLookup do
       end
 
       it "raises an error nil passed" do
-        expect { described_class.adapter = nil}
+        expect { described_class.adapter = nil }
           .to raise_error(EA::AddressLookup::MissingAdapterError)
       end
 
