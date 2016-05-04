@@ -4,14 +4,16 @@
 #  EA::AddressLookup.logger.level = Logger::ERROR
 require "logger"
 
-module EA::AddressLookup
-  class << self
-    attr_writer :logger
+module EA
+  module AddressLookup
+    class << self
+      attr_writer :logger
 
-    def logger
-      @logger ||= Logger.new($stdout).tap do |log|
-        log.progname = self.name
-        log.level = Logger::DEBUG
+      def logger
+        @logger ||= Logger.new($stdout).tap do |log|
+          log.progname = name
+          log.level = Logger::DEBUG
+        end
       end
     end
   end

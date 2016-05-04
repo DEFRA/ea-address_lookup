@@ -3,7 +3,7 @@ require "spec_helper"
 describe EA::AddressLookup::Configuration do
   let(:config) { EA::AddressLookup.config }
 
-  it {is_expected.to respond_to(:default_adapter) }
+  it { is_expected.to respond_to(:default_adapter) }
 
   describe "#configure" do
     it "can set and get configuration options" do
