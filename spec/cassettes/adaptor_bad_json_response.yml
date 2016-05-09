@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://addressfacade.cloudapp.net/address-service/v1/addresses/postcode?client-id=example%20team1&key=client1&postcode=BS1%201AH
+    uri: http://someaddressfacadeservice.net/address-service/v1/addresses/postcode?client-id=example%20team1&key=client1&postcode=BS1%201AH
     body:
       encoding: US-ASCII
       string: ''
@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - rest-client/2.0.0.rc2 (linux-gnu x86_64) ruby/2.2.3p173
       Host:
-      - addressfacade.cloudapp.net
+      - someaddressfacadeservice.net
   response:
     status:
       code: 200

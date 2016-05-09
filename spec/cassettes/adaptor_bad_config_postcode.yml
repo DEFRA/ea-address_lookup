@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://addressfacade.cloudapp.net/address-service/v1/addresses/postcode?client-id=example%20team1&key=clientduffnaff&postcode=BS1%201AH
+    uri: http://someaddressfacadeservice.net/address-service/v1/addresses/postcode?client-id=example%20team1&key=clientduffnaff&postcode=BS1%201AH
     body:
       encoding: US-ASCII
       string: ''
