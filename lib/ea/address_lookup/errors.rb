@@ -1,7 +1,15 @@
+require "nesty"
+
 module EA
   module AddressLookup
-    class MissingAdapterError < StandardError; end
-    class UnrecognisedAdapterError < StandardError; end
-    class AddressServiceUnavailableError < StandardError; end
+    class MissingAdapterError < StandardError
+      include Nesty::NestedError
+    end
+    class UnrecognisedAdapterError < StandardError
+      include Nesty::NestedError
+    end
+    class AddressServiceUnavailableError < StandardError
+      include Nesty::NestedError
+    end
   end
 end

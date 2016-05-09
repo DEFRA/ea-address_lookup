@@ -43,9 +43,9 @@ module EA
 
         def base_url
           @base_url ||= begin
-            server = EA::AddressLookup.config.address_facade_server
-            port = EA::AddressLookup.config.address_facade_port
-            url = EA::AddressLookup.config.address_facade_url
+            server = config.address_facade_server
+            port = config.address_facade_port
+            url = config.address_facade_url
             host = "http://#{server}:#{port}"
             URI.join(host, url || "").to_s
           end
@@ -69,9 +69,17 @@ module EA
 
         def default_query_params
           {
-            'client-id': EA::AddressLookup.config.address_facade_client_id,
-            'key': EA::AddressLookup.config.address_facade_key
+            'client-id': config.address_facade_client_id,
+            'key': config.address_facade_key
           }
+        end
+
+        def config
+          EA::AddressLookup.config
+        end
+
+        def logger
+          EA::AddressLookup.logger
         end
 
         # The AddressBaseFacade is internal within AWS, so we need to
@@ -82,7 +90,7 @@ module EA
             method: :get,
             url: http_address,
             proxy: false,
-            timeout: EA::AddressLookup.config.timeout_in_seconds,
+            timeout: config.timeout_in_seconds,
             headers: {
               params: default_query_params.merge(query_params)
             })
@@ -97,7 +105,7 @@ module EA
         def parse_json(json)
           JSON.parse(json)
         rescue => e
-          EA::AddressLookup.logger.error("Failed to parse JSON results "\
+          logger.error("Failed to parse JSON results "\
                                          "#{e.message} #{json}")
           {}
         end
@@ -107,9 +115,9 @@ module EA
           time = Benchmark.realtime do
             parsed_result = yield
           end
-          EA::AddressLookup.logger.info "#{scope}(#{arg}) took "\
+          logger.info "#{scope}(#{arg}) took "\
                                          "#{sprintf('%05.2fms', time * 1000)}"
-          EA::AddressLookup.logger.debug "#{scope}(#{arg}) #{parsed_result}"
+          logger.debug "#{scope}(#{arg}) #{parsed_result}"
           parsed_result
         end
       end
