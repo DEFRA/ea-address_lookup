@@ -86,20 +86,26 @@ module EA
         # ensure that we DO NOT use a proxy in http calls.
         def http_get(path, query_params = {})
           http_address = URI.join(base_url, path).to_s
-          RestClient::Request.execute(
-            method: :get,
-            url: http_address,
-            proxy: false,
-            timeout: config.timeout_in_seconds,
-            headers: {
-              params: default_query_params.merge(query_params)
-            })
+          args = build_request_args(http_address, query_params)
+          RestClient::Request.execute(args)
         rescue => ex
           raise ex if ex.class.to_s =~ /^VCR/
           raise EA::AddressLookup::AddressServiceUnavailableError,
                 "#{http_address} "\
                 "params:#{default_query_params.merge(query_params)} - "\
                 "#{ex.message}"
+        end
+
+        def build_request_args(http_address, query_params)
+          {
+            method: :get,
+            url: http_address,
+            proxy: false,
+            timeout: config.timeout_in_seconds,
+            headers: {
+              params: default_query_params.merge(query_params)
+            }
+          }
         end
 
         def parse_json(json)

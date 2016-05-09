@@ -19,7 +19,7 @@ VCR.configure do |config|
   config.ignore_hosts "127.0.0.1"
   config.allow_http_connections_when_no_cassette = false
   config.default_cassette_options = {
-    record: :once
+    record: :none
   }
 end
 
