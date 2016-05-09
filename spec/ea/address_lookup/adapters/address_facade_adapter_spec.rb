@@ -68,7 +68,14 @@ describe EA::AddressLookup::Adapters::AddressFacade do
     context "bad server" do
       let(:server) { "addressfacade.nosuchplaceinthewww.junk" }
       it "raises an exception when service cannot be reached for uprn search" do
-        VCR.use_cassette("adaptor_no_such_server_uprn") do
+        # An issue here: if you run this in the EA office, you get a 404 and the
+        # cassette is not even used; if you run elsewhere an ISP might return
+        # a custom 404 page (with a 200 code) in which case the cassette is created
+        # and is totally wrong. There are ways you can disable the ISPs 404 for
+        # example by setting custom DNS servers (eg e.g. Google's) in the router.
+        # So if you are running these tests from hoome and have a VCR error,
+        # please ignore and treat CI results as the source of truth!
+        VCR.use_cassette("adaptor_no_such_server_uprn", record: :once) do
           expect {
             subject.find_by_uprn("77138")
           }.to raise_error EA::AddressLookup::AddressServiceUnavailableError
@@ -76,7 +83,7 @@ describe EA::AddressLookup::Adapters::AddressFacade do
       end
 
       it "raises an exception when service unreachable for postcode search" do
-        VCR.use_cassette("adaptor_no_such_server_postcode") do
+        VCR.use_cassette("adaptor_no_such_server_postcode", record: :once) do
           expect {
             subject.find_by_postcode("BS1 1AH")
           }.to raise_error EA::AddressLookup::AddressServiceUnavailableError
