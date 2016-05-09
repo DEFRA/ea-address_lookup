@@ -2,9 +2,23 @@ language: ruby
 cache: bundler
 
 rvm:
-  - 2.2.3
+  - 2.3.1
 
-before_install: gem install bundler -v 1.11.2
+before_install:
+  - nvm install node
+  - gem install bundler -v 1.11.2
+
+bundler_args: --binstubs=./bundler_stubs
+
+before_script:
+  - npm install -g jshint coffeelint htmlhint csslint # overcommit packages
+
+script:
+  - bundle exec rake --trace before_commit:run_without_checks
+  - git config --global user.email test@example.com # overcommit Author
+  - git config --global user.name "Test Example" # overcommit Author
+  - BUNDLE_GEMFILE=.overcommit_gems.rb bundle exec overcommit --run
+  - bundle exec rspec
 
 # Have this option to stop travis-ci building twice. Currently we have travis set to build both
 # PR's and pushes. However this means when we push to a PR we have to wait for Travis to finish
@@ -23,3 +37,12 @@ addons:
   code_climate:
     repo_token:
       secure: "NHoT4H5wYUhdGoByjcnViaLzHFkxKgSgZPCNtWtaCdrWXUwX8VLYYl6NPqvANMII0z81Fq8P0+Nzo0o0YfWAvXsimsuhXd4hdzMSKW+xp6G5KRmCaU8FfIjqGhf0yYs3jmTD6Bz2rv1uhZ080k39OXBE/pGR3pkd229lVxrVR91zYYnERqNGD7p78NDGCTPlyoYYNB+wMLq76p6Hl2dSZgwMQtDS/Qi95vG+3Zq2y3z+iarlXSxm2xqfYMgUTcoO3w1eL2P/I+y/SqKgqKEpNKTzicFySUUg5NEvQy/GQit6iArkemU3q364fp4RqkUzauDenEsE64Q6MNY/n7Pj+ZVUKvT3mFKr2OAQojrJko2vtM7QuxBKmaRvkA89JRJvXDTREqbB1gY9pmnAbxBQbRW25KRSucKRPIGhK+gfwjM01eINveR86KECyTOLkrVcWFihrXzrIxLzv37UQUh9UVE/+aca0QVivYa6jJOebPKeLxS3sPLco8clv4A1H7HfvAkzg9lzWC6cz/cSOmQWWvAcDsd+riMaq188fCGuPhHcGywzwH4qt/75b8vnOoOSZSxqNAvQfsf0np0V+N2ahiGqpBhTgPKD3B+Mhff2KN0WY0eejzUMdPdi6zNcjJySyvLBZ9Jrmb+Vf/X1DhEqg05n/V2lQCWzoeJw4zSyRyU="
+
+deploy:
+  provider: rubygems
+  api_key:
+    secure: "HPERtzREWDTHbl0EKL9E6J5SKEdKhcbvhgAEgDJ7h0TERiPmmhzXEMN8wFUz3xFx4JVn+cNYdnqmRaJ6KJQKUsC7aNwKkwBM220/xIUYksBzbcqQ7YODSnkLknc7uDNXWlny+oqY/KWqdcfsHr+CJImbLg0XIZEm4EH28f6vQctfKyjov2IhML8JFcnzWvjP1NHw03MZf1CDlDdh84hl0gv+lPe6lWtvKZarRqJIaP7Tzq+x/PcO0vdZfe37gmKNxxswPDmLbjPmjJEts5qO+9QcidBi/lXrTxGuXBGzXxcOmqlsr7SZVyPWAHOs9Lc/eB/iNJBQ5X5JSS2FgSmNrvh8w9WcNNZN7Ng398zEsqJTDVmPjCmkYMxvcpoB/6XBiPjmhji3kWqHicP0u1FkWFlTlaZk0wCjoPAuDiAJI8V0fzEc/73S3t+sP8igiNgw8qq2JegvRaVAvYdbmovWASaMb8x64BLpEGv5VVIe+ML5w99Y33mWPO8bOz99ZBFNG5pDJerM6mHB+hrVh+YC7UAb0yS/yn90Id02fQlt6Uxn/rSKuuRX096ha1oexYUaIKzjOGD0ReuKs33JpoqzPPjz7mu0+ncQClZtQyEBPgFrS5AqIauSxMzC+UsRrZ5M8cz9dZ3QrxHuhWoDLjVtAIqJq0eE0LbJaknvwphvtSA="
+  gem: ea-address_lookup
+  on:
+    repo: EnvironmentAgency/ea-address_lookup
+    all_branches: true

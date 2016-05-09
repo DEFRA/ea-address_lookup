@@ -3,14 +3,14 @@ require "spec_helper"
 describe EA::AddressLookup::Adapters::AddressFacade do
   before do
     EA::AddressLookup.configure do |config|
-      config.address_facade_server = server # 'addressfacade.cloudapp.net'
+      config.address_facade_server = server # 'someaddressfacadeservice.net'
       config.address_facade_port = ""
       config.address_facade_url = url # '/address-service/v1/addresses/'
       config.address_facade_client_id = client_id # 'example team'
       config.address_facade_key = key # 'client1'
     end
   end
-  let(:server)      { "addressfacade.cloudapp.net" }
+  let(:server)      { "someaddressfacadeservice.net" }
   let(:url)         { "/address-service/v1/addresses/" }
   let(:key)         { "client1" }
   let(:client_id)   { "example team1" }
