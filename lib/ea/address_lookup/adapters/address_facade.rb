@@ -82,6 +82,7 @@ module EA
             method: :get,
             url: http_address,
             proxy: false,
+            timeout: EA::AddressLookup.config.timeout_in_seconds,
             headers: {
               params: default_query_params.merge(query_params)
             })
