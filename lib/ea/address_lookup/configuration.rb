@@ -9,6 +9,7 @@ module EA
       config_accessor(:address_facade_url)
       config_accessor(:address_facade_client_id)
       config_accessor(:address_facade_key)
+      config_accessor(:timeout_in_seconds) { 5 }
       config_accessor(:default_adapter) { :address_facade }
     end
 

@@ -13,12 +13,14 @@ describe EA::AddressLookup::Configuration do
         c.address_facade_url = "c"
         c.address_facade_client_id = "d"
         c.address_facade_key = "e"
+        c.timeout_in_seconds = 11
       end
       expect(config.address_facade_server).to eq "a"
       expect(config.address_facade_port).to eq "b"
       expect(config.address_facade_url).to eq "c"
       expect(config.address_facade_client_id).to eq "d"
       expect(config.address_facade_key).to eq "e"
+      expect(config.timeout_in_seconds).to eq 11
     end
   end
 
@@ -33,6 +35,9 @@ describe EA::AddressLookup::Configuration do
   describe "defaults" do
     it "has a default_adapter" do
       expect(config.default_adapter).to_not be_blank
+    end
+    it "has a default timeout" do
+      expect(config.timeout_in_seconds).to_not be_blank
     end
   end
 end
