@@ -42,5 +42,6 @@ deploy:
     secure: "HPERtzREWDTHbl0EKL9E6J5SKEdKhcbvhgAEgDJ7h0TERiPmmhzXEMN8wFUz3xFx4JVn+cNYdnqmRaJ6KJQKUsC7aNwKkwBM220/xIUYksBzbcqQ7YODSnkLknc7uDNXWlny+oqY/KWqdcfsHr+CJImbLg0XIZEm4EH28f6vQctfKyjov2IhML8JFcnzWvjP1NHw03MZf1CDlDdh84hl0gv+lPe6lWtvKZarRqJIaP7Tzq+x/PcO0vdZfe37gmKNxxswPDmLbjPmjJEts5qO+9QcidBi/lXrTxGuXBGzXxcOmqlsr7SZVyPWAHOs9Lc/eB/iNJBQ5X5JSS2FgSmNrvh8w9WcNNZN7Ng398zEsqJTDVmPjCmkYMxvcpoB/6XBiPjmhji3kWqHicP0u1FkWFlTlaZk0wCjoPAuDiAJI8V0fzEc/73S3t+sP8igiNgw8qq2JegvRaVAvYdbmovWASaMb8x64BLpEGv5VVIe+ML5w99Y33mWPO8bOz99ZBFNG5pDJerM6mHB+hrVh+YC7UAb0yS/yn90Id02fQlt6Uxn/rSKuuRX096ha1oexYUaIKzjOGD0ReuKs33JpoqzPPjz7mu0+ncQClZtQyEBPgFrS5AqIauSxMzC+UsRrZ5M8cz9dZ3QrxHuhWoDLjVtAIqJq0eE0LbJaknvwphvtSA="
   gem: ea-address_lookup
   on:
+    tags: true
     repo: EnvironmentAgency/ea-address_lookup
     all_branches: true
