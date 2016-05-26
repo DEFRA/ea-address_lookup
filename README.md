@@ -44,6 +44,32 @@ hash = EA::AddressLookup.find_by_postcode('BA1 5AH')
 hash = EA::AddressLookup.find_by_uprn('12345678')
 ```
 
+## Testing with RSpec
+A test helper is included that provides methods that will stub calls to
+EA::AddressLookup methods in RSpec tests. To enable them add this to
+the rspec configuration (for example, within a `RSpec.configure do |config|`
+block in a Rails app's `spec/rails_helper.rb`):
+
+```ruby
+config.include EA::AddressLookup::TestHelper::RspecMocks
+```
+
+This will make the methods defined in `lib/ea/address_lookup/test_helper/rspec_mocks.rb`
+available within the host app's rspec tests. For example:
+
+```ruby
+describe "postcode lookup" do
+  before do
+    mock_ea_address_lookup_find_by_postcode
+  end
+
+  it "some tests that use data returned by a postcode lookup" do
+    ....
+  end
+end
+```
+
+
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.
