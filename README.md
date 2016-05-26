@@ -11,13 +11,19 @@ This ruby gem provides address lookup functionality by postcode.
 Add the gem to your Gemfile
 
 ```ruby
-gem 'ea-address_lookup'
+gem "ea-address_lookup"
 ```
 
 Then execute:
 
 ```bash
 bundle install
+```
+
+You may also need to add this to your ruby code before using this gem:
+
+```ruby
+require "ea/address_lookup"
 ```
 
 ## Usage
