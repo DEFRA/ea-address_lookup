@@ -52,9 +52,19 @@ hash = EA::AddressLookup.find_by_uprn('12345678')
 
 ## Testing with RSpec
 A test helper is included that provides methods that will stub calls to
-EA::AddressLookup methods in RSpec tests. To enable them add this to
-the rspec configuration (for example, within a `RSpec.configure do |config|`
-block in a Rails app's `spec/rails_helper.rb`):
+EA::AddressLookup methods in RSpec tests.
+
+The available mock methods are:
+
+```
+mock_ea_address_lookup_find_by_uprn
+mock_failure_of_ea_address_lookup_find_by_uprn
+mock_ea_address_lookup_find_by_postcode
+mock_failure_of_ea_address_lookup_find_by_postcode
+```
+
+To enable them add this to the rspec configuration (for example, within a
+ `RSpec.configure do |config|` block in a Rails app's `spec/rails_helper.rb`):
 
 ```ruby
 config.include EA::AddressLookup::TestHelper::RspecMocks
@@ -71,10 +81,14 @@ describe "postcode lookup" do
 
   it "some tests that use data returned by a postcode lookup" do
     ....
+    # Any EA::AddressLookup.find_by_postcode calls made in this spec will return the same
+    # mocked data, and no external requests will be made, so you don't need webmock/VCR.
+    # You can pass any postcode or uprn argument to the find_by_* methods, but they will
+    # always return the mocked data and will not echo back your input.
+    # See test_helper/address_lookup.yml to examine the mock data that will be returned.
   end
 end
 ```
-
 
 ## Contributing to this project
 
