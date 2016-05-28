@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dst@environment-agency.gov.uk"]
 
   spec.summary       = "Address lookup by postcode"
-  spec.description   = "Address lookup by postcode. Wraps calls to osplaces an api."
+  spec.description   = "This gem is a wrapper around services which provide address lookup by postcode."
   spec.homepage      = "https://github.com/EnvironmentAgency"
   spec.license       = "The Open Government Licence (OGL) Version 3"
 
