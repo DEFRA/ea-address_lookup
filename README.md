@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/EnvironmentAgency/ea-address_lookup.svg?branch=master)](https://travis-ci.org/EnvironmentAgency/ea-address_lookup)
 [![Code Climate](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/badges/gpa.svg)](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup)
 [![Test Coverage](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/badges/coverage.svg)](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/coverage)
+[![Gem Version](https://badge.fury.io/rb/ea-address_lookup.svg)](https://badge.fury.io/rb/ea-address_lookup)
 
 This ruby gem provides address lookup functionality by postcode.
 
