@@ -7,8 +7,8 @@ module EA
           @file_name = file_name.to_s.strip
         end
 
-        def data_for(key)
-          yaml[key.to_s]
+        def data_for(key, mod = {})
+          yaml[key.to_s].merge! mod
         end
 
         private

@@ -91,6 +91,35 @@ describe "postcode lookup" do
 end
 ```
 
+Note, that you can also pass output modifications into the mock methods:
+
+```ruby
+describe "postcode lookup" do
+  let(:address_one) do
+    {
+      "uprn" => 340116
+        ....
+      "source_data_type" => dpa
+    }
+  end
+  let(:address_two) { address_one.merge("postcode" => "XX7 8XX" }
+  let(:addresses) { [address_one, address_two] }
+
+  before do
+    mock_ea_address_lookup_find_by_postcode("results" => addresses)
+  end
+
+  it "some tests that use data returned by a postcode lookup" do
+    address_data = EA::AddressLookup.find_by_uprn("77138")
+    expect(address_data["results"]).to eq(addresses)
+  end
+end
+```
+
+The modifications are merged into the output, so must match the correct data
+structure. Note that in the example above `address_data["results"]` returns
+an array of address data hashes.
+
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.
