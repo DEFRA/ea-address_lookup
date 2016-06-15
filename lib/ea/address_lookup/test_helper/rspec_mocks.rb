@@ -5,10 +5,10 @@ module EA
       # Uses data from address_lookup.yml to mock calls to EA::AddressLookup methods
       module RspecMocks
 
-        def mock_ea_address_lookup_find_by_uprn
+        def mock_ea_address_lookup_find_by_uprn(mod = {})
           allow(EA::AddressLookup)
             .to receive(:find_by_uprn)
-            .and_return(mock_data.data_for(:uprn_lookup))
+            .and_return(mock_data.data_for(:uprn_lookup, mod))
         end
 
         def mock_failure_of_ea_address_lookup_find_by_uprn
@@ -17,10 +17,10 @@ module EA
             .and_raise(AddressServiceUnavailableError, "Whoops")
         end
 
-        def mock_ea_address_lookup_find_by_postcode
+        def mock_ea_address_lookup_find_by_postcode(mod = {})
           allow(EA::AddressLookup)
             .to receive(:find_by_postcode)
-            .and_return(mock_data.data_for(:postcode_lookup))
+            .and_return(mock_data.data_for(:postcode_lookup, mod))
         end
 
         def mock_failure_of_ea_address_lookup_find_by_postcode

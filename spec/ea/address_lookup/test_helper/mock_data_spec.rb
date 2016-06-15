@@ -44,6 +44,19 @@ module EA
               expect(data["results"].first.keys.sort)
                 .to eq(uprn_response["results"].first.keys.sort)
             end
+
+            context "and with results modification" do
+              let(:addresses) { [:address_one, :address_two] }
+              let(:data) { mock_data.data_for :uprn_lookup, "results" => addresses }
+
+              it "should include modification" do
+                expect(data["results"]).to eq(addresses)
+              end
+
+              it "should leave other data in place" do
+                expect(data["uri_from_client"]).to eq(uprn_response["uri_from_client"])
+              end
+            end
           end
 
           context "with :postcode_lookup" do
