@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activesupport", ">= 4.2"
+  spec.add_dependency "activesupport", ">= 4.2.2"
   spec.add_dependency "rest-client", "~> 2.0.0.rc2"
   spec.add_dependency "nesty", "~> 1.0"
 

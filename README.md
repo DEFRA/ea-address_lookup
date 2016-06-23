@@ -1,6 +1,7 @@
 # EA::AddressLookup
 
 [![Build Status](https://travis-ci.org/EnvironmentAgency/ea-address_lookup.svg?branch=master)](https://travis-ci.org/EnvironmentAgency/ea-address_lookup)
+[![security](https://hakiri.io/github/EnvironmentAgency/ea-address_lookup/master.svg)](https://hakiri.io/github/EnvironmentAgency/ea-address_lookup/master)
 [![Code Climate](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/badges/gpa.svg)](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup)
 [![Test Coverage](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/badges/coverage.svg)](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/coverage)
 [![Gem Version](https://badge.fury.io/rb/ea-address_lookup.svg)](https://badge.fury.io/rb/ea-address_lookup)
