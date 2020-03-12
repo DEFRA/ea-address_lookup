@@ -1,10 +1,11 @@
 # EA::AddressLookup
 
-[![Build Status](https://travis-ci.org/EnvironmentAgency/ea-address_lookup.svg?branch=master)](https://travis-ci.org/EnvironmentAgency/ea-address_lookup)
-[![security](https://hakiri.io/github/EnvironmentAgency/ea-address_lookup/master.svg)](https://hakiri.io/github/EnvironmentAgency/ea-address_lookup/master)
-[![Code Climate](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/badges/gpa.svg)](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup)
-[![Test Coverage](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/badges/coverage.svg)](https://codeclimate.com/github/EnvironmentAgency/ea-address_lookup/coverage)
+[![Build Status](https://travis-ci.com/DEFRA/ea-address_lookup.svg?branch=master)](https://travis-ci.com/DEFRA/ea-address_lookup)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ea-address_lookup&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_ea-address_lookup)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ea-address_lookup&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_ea-address_lookup)
+[![security](https://hakiri.io/github/DEFRA/ea-address_lookup/master.svg)](https://hakiri.io/github/DEFRA/ea-address_lookup/master)
 [![Gem Version](https://badge.fury.io/rb/ea-address_lookup.svg)](https://badge.fury.io/rb/ea-address_lookup)
+[![Licence](https://img.shields.io/badge/Licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
 This ruby gem provides address lookup functionality by postcode.
 
@@ -38,7 +39,7 @@ Create an intializer eg `config/initializers/address_lookup.rb`
 EA::AddressLookup.configure do |config|
   config.address_facade_server = <some_host_name>
   config.address_facade_port = ""
-  config.address_facade_url = "/address-service/v1/addresses/""
+  config.address_facade_url = "/address-service/v1/addresses/"
   config.address_facade_client_id = <client_id>
   config.address_facade_key = <key>
 end
@@ -53,12 +54,13 @@ hash = EA::AddressLookup.find_by_uprn('12345678')
 ```
 
 ## Testing with RSpec
+
 A test helper is included that provides methods that will stub calls to
 EA::AddressLookup methods in RSpec tests.
 
 The available mock methods are:
 
-```
+```ruby
 mock_ea_address_lookup_find_by_uprn
 mock_failure_of_ea_address_lookup_find_by_uprn
 mock_ea_address_lookup_find_by_postcode
@@ -131,7 +133,7 @@ All contributions should be submitted via a pull request.
 
 THIS INFORMATION IS LICENSED UNDER THE CONDITIONS OF THE OPEN GOVERNMENT LICENCE found at:
 
-http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3
+<http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3>
 
 The following attribution statement MUST be cited in your products and applications when using this information.
 

@@ -1,29 +1,23 @@
-language: ruby
-cache: bundler
-rvm:
-  - 2.3.1
-before_install:
-  - gem install bundler -v 1.11.2
-bundler_args: "--binstubs=./bundler_stubs"
-before_script:
-script:
-  - bundle exec rake --trace before_commit:run_without_checks
-  - git config --global user.email test@example.com
-  - git config --global user.name "Test Example"
-  - BUNDLE_GEMFILE=.overcommit_gems.rb bundle exec overcommit --run
-  - bundle exec rspec
-branches:
-  only:
-    - master
+dist: trusty
+
 addons:
-  code_climate:
-    repo_token:
-      secure: NHoT4H5wYUhdGoByjcnViaLzHFkxKgSgZPCNtWtaCdrWXUwX8VLYYl6NPqvANMII0z81Fq8P0+Nzo0o0YfWAvXsimsuhXd4hdzMSKW+xp6G5KRmCaU8FfIjqGhf0yYs3jmTD6Bz2rv1uhZ080k39OXBE/pGR3pkd229lVxrVR91zYYnERqNGD7p78NDGCTPlyoYYNB+wMLq76p6Hl2dSZgwMQtDS/Qi95vG+3Zq2y3z+iarlXSxm2xqfYMgUTcoO3w1eL2P/I+y/SqKgqKEpNKTzicFySUUg5NEvQy/GQit6iArkemU3q364fp4RqkUzauDenEsE64Q6MNY/n7Pj+ZVUKvT3mFKr2OAQojrJko2vtM7QuxBKmaRvkA89JRJvXDTREqbB1gY9pmnAbxBQbRW25KRSucKRPIGhK+gfwjM01eINveR86KECyTOLkrVcWFihrXzrIxLzv37UQUh9UVE/+aca0QVivYa6jJOebPKeLxS3sPLco8clv4A1H7HfvAkzg9lzWC6cz/cSOmQWWvAcDsd+riMaq188fCGuPhHcGywzwH4qt/75b8vnOoOSZSxqNAvQfsf0np0V+N2ahiGqpBhTgPKD3B+Mhff2KN0WY0eejzUMdPdi6zNcjJySyvLBZ9Jrmb+Vf/X1DhEqg05n/V2lQCWzoeJw4zSyRyU=
-deploy:
-  provider: rubygems
-  api_key:
-    secure: BQYV2mKJ4LItAiYgYSW1ixVMIlk1ahzvbMXJz/xtH2XfZzT7T6r17VbjpH2pbJo5QbChwsWaZOAZq2nrPIsgrh09/liflZC010Qc60zIYqgB4LXOu7KM6XEpfSvc/NCf0NwPExIjF2jskuhAwQXJVWLCcDGEyUEGnNhn5NDPq7TXR9U0sQyY1MZfJvlQwUNgaOThGA7b6DzUiim7LpGTAs7PcBHKfgwr1hRqVQ0VMF1jZsdvVID9IPVqfojOrNnAzoN2MpgybhsUTkSueV6WaWPhbY0eXH2U0EKx9grlyb0TBHfYVSADC8tNKB/ooJv6ofHfL+cZTki4+gCKOmv+vs2IkNqs1fucLMwDaE48sI/9omvyPPD4t1SMAhA+IBCUGQdXz8CvIsLf6gf/N8srQnUv8QiAoHw1ArkCt4Y2D1iYAf8r+XGP4nuewVJwNHG+9qQILDz4xlCPUJFtBdbiDo1RjazoLtOhTfnSemXeDVl+GUE09fzO3iclBAN2wiGGLRy57SEs+VkQLmPGb9aaJ+LXuMgtr1lzqX0x4JdyG690qCoZcRF+uwDcnBX+HjJcZOzcHORpOlqJM8LaFl86oo3DrdnvJgpkumn3LllsS2CYOO191b3nWnN0lbEuLpT0TbtO4Mhk/YwDG9VZpbwAATiLBMd0IiAmlGbdZMw9ias=
-  gem: ea-address_lookup
-  on:
-    tags: true
-    repo: EnvironmentAgency/ea-address_lookup
+  sonarcloud:
+    organization: "defra"
+
+language: ruby
+rvm: 2.3.1
+cache: bundler
+
+# Travis CI uses shallow clone to speed up build times, but a truncated SCM
+# history may cause issues when SonarCloud computes blame data. To avoid this,
+# you can access the full SCM history with `depth: false`
+git:
+  depth: false
+
+before_install:
+  - export TZ=UTC
+  - gem install -v 1.17.3 bundler --no-document
+
+script:
+  - bundle exec rspec
+  - sonar-scanner
