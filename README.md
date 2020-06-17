@@ -1,9 +1,9 @@
 # EA::AddressLookup
 
-[![Build Status](https://travis-ci.com/DEFRA/ea-address_lookup.svg?branch=master)](https://travis-ci.com/DEFRA/ea-address_lookup)
+[![Build Status](https://travis-ci.com/DEFRA/ea-address_lookup.svg?branch=main)](https://travis-ci.com/DEFRA/ea-address_lookup)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ea-address_lookup&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_ea-address_lookup)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ea-address_lookup&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_ea-address_lookup)
-[![security](https://hakiri.io/github/DEFRA/ea-address_lookup/master.svg)](https://hakiri.io/github/DEFRA/ea-address_lookup/master)
+[![security](https://hakiri.io/github/DEFRA/ea-address_lookup/main.svg)](https://hakiri.io/github/DEFRA/ea-address_lookup/main)
 [![Gem Version](https://badge.fury.io/rb/ea-address_lookup.svg)](https://badge.fury.io/rb/ea-address_lookup)
 [![Licence](https://img.shields.io/badge/Licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
