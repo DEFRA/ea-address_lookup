@@ -7,6 +7,8 @@
 [![Gem Version](https://badge.fury.io/rb/ea-address_lookup.svg)](https://badge.fury.io/rb/ea-address_lookup)
 [![Licence](https://img.shields.io/badge/Licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
+> This repo is no longer being maintained or used. For an address lookup gem that can integrate with the EA Address Facade or the OS Places Address Lookup, use [DefraRuby::Address](https://github.com/DEFRA/defra-ruby-address)
+
 This ruby gem provides address lookup functionality by postcode.
 
 ## Installation
